@@ -1,0 +1,1 @@
+export const ApiSios = 'http://10.10.1.15:8085/ApiFarmaciaServices/api/Farmacia';

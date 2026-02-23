@@ -1,0 +1,23 @@
+# Dependencias
+node_modules/
+*.rar
+*.bat
+.env
+.env.*
+build/
+# Archivos batch
+*.bat
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+
+# Builds
+dist/
+build/
+
+# Sistema
+.DS_Store
+Thumbs.db
