@@ -24,18 +24,22 @@ import SolicitudesDevolucionesAprovechamiento from "views/app/SolicitudesDevoluc
 import DevolucionesAprovechamientoPendientes from "views/app/DevolucionesAprovechamientoPendientes";
 import SolicitudesDevolucionesConfirmadas from "views/app/SolicitudesDevolucionesConfirmadas";
 import SolicitudesDispensadas from "views/app/SolicitudesDispensadas";
-import recepcionesRequisicionesRecibidas from "views/app/recepcionesRequisicionesRecibidas"
-import InformeRelacionMedicamentos from "views/app/InformeRelacionMedicamentos"
-import DispensacionesRequisiciones from "views/app/DispensacionesRequisiciones"
-import InformeDevoluciones from "views/app/InformeDevoluciones"
-import InformeAuditoriaMedicamentos from "views/app/InformeAuditoriaMedicamentos"
-import InformeAprovechamiento from "views/app/InformeDispensacionesAprovech"
-import InformeDevolucionAprovechamiento from "views/app/InformeDevolucionAprovech"
-import InformePrescripciones from "views/app/InformePrescripciones"
-import InformePrescripcionesArchivadas from "views/app/InformePrescripcionesArchivadas"
-import InformeDispensacionesDescuento from "views/app/InformeDispensacionesDescuento"
-import InformePrescripcionesPeriodo from "views/app/InformePrescripcionesPeriodo"
-import InformeRequisiciones from "views/app/InformeRequisiciones"
+import recepcionesRequisicionesRecibidas from "views/app/recepcionesRequisicionesRecibidas";
+import InformeRelacionMedicamentos from "views/app/InformeRelacionMedicamentos";
+import DispensacionesRequisiciones from "views/app/DispensacionesRequisiciones";
+import InformeDevoluciones from "views/app/InformeDevoluciones";
+import InformeAuditoriaMedicamentos from "views/app/InformeAuditoriaMedicamentos";
+import InformeAprovechamiento from "views/app/InformeDispensacionesAprovech";
+import InformeDevolucionAprovechamiento from "views/app/InformeDevolucionAprovech";
+import InformePrescripciones from "views/app/InformePrescripciones";
+import InformePrescripcionesArchivadas from "views/app/InformePrescripcionesArchivadas";
+import InformeDispensacionesDescuento from "views/app/InformeDispensacionesDescuento";
+import InformePrescripcionesPeriodo from "views/app/InformePrescripcionesPeriodo";
+import InformeRequisiciones from "views/app/InformeRequisiciones";
+import InformeTiempoCicloDispensacion from "views/app/InformeTiempoCicloDispensacion";
+import SeguimientosAlmacenamientos from "views/app/SeguimientosAlmacenamientos";
+import InformeAdherenciaSeguimientoDispensacion from "views/app/InformeAdherenciaSeguimientoDispensacion";
+import ServiciosSeguimiento from "views/app/ServiciosSeguimiento";
 
 export {
   Chat,
@@ -75,5 +79,9 @@ export {
   InformePrescripcionesArchivadas,
   InformeDispensacionesDescuento,
   InformePrescripcionesPeriodo,
-  InformeRequisiciones
+  InformeRequisiciones,
+  InformeTiempoCicloDispensacion,
+  SeguimientosAlmacenamientos,
+  InformeAdherenciaSeguimientoDispensacion,
+  ServiciosSeguimiento
 };

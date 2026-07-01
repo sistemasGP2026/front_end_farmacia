@@ -13,7 +13,7 @@ import { ComponentToPrint } from "../Imprimir/Print";
 import Icon from "@material-ui/core/Icon";
 import SweetAlert from "react-bootstrap-sweetalert";
 import FormModal from "./FormModal";
-import cogoToast from 'cogo-toast';
+import cogoToast from "cogo-toast";
 import {
   Dropdown,
   DropdownToggle,
@@ -22,7 +22,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
+  ModalFooter
 } from "reactstrap";
 import { confirmAlert } from "react-confirm-alert";
 let piso = "";
@@ -66,7 +66,7 @@ class RequisicionesForm extends React.Component {
       EstadoCargueBorrador: false,
       fechaActual: "",
       ListaRelacionProductos: [],
-      OpenModal2: false,
+      OpenModal2: false
     };
   }
 
@@ -81,13 +81,12 @@ class RequisicionesForm extends React.Component {
     if (mes < 10) mes = "0" + mes; //agrega cero si el menor de 10
     let fechaActual = ano + "-" + mes + "-" + dia + "T" + hora + ":" + minuto;
 
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      fechaActual: fechaActual,
+      fechaActual: fechaActual
     }));
 
     if (this.props.data) {
-      console.log(this.props.data);
       for (let k = 0; k < this.props.data.ArrayMedicamentos.length; k++) {
         this.props.data.ArrayMedicamentos[k].Entrega = 0;
         this.props.data.ArrayMedicamentos[
@@ -96,42 +95,42 @@ class RequisicionesForm extends React.Component {
         this.props.data.ArrayMedicamentos[k].Productos = [];
       }
 
-      this.setState((state) => ({
+      this.setState(state => ({
         ...state,
-        ListaPedido: this.props.data,
+        ListaPedido: this.props.data
       }));
     }
   }
 
-  Cancelar = (e) => {
+  Cancelar = e => {
     this.props.CancelarDispensacion("cancelar");
   };
 
-  checkedMedicamento = (e) => {
+  checkedMedicamento = e => {
     const selectedTem = this.state.selected ? this.state.selected : [];
     if (selectedTem.includes(e.target.value)) {
       let index = selectedTem.indexOf(e.target.value);
       if (index > -1) {
         selectedTem.splice(index, 1);
       }
-      this.setState((state) => ({
+      this.setState(state => ({
         ...state,
         selected: null,
         ...state,
-        selected: selectedTem,
+        selected: selectedTem
       }));
     } else {
       selectedTem.push(e.target.value);
-      this.setState((state) => ({
+      this.setState(state => ({
         ...state,
         selected: null,
         ...state,
-        selected: selectedTem,
+        selected: selectedTem
       }));
     }
   };
 
-  Agregar = (e) => {
+  Agregar = e => {
     e.preventDefault();
     let obj = {};
     obj.Medicamento = e.target.Medicamento.value;
@@ -140,18 +139,18 @@ class RequisicionesForm extends React.Component {
     const filteredContactlistsTem = this.state.ListaPedido;
 
     filteredContactlistsTem.splice(0, 0, obj);
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      ListaPedido: filteredContactlistsTem,
+      ListaPedido: filteredContactlistsTem
     }));
   };
   SetselectDrp = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      selectDrp: !this.state.selectDrp,
+      selectDrp: !this.state.selectDrp
     }));
   };
-  dleChange = (event) => {
+  dleChange = event => {
     if (event.target) {
       let listaTemp = this.state.ListaPedido.ArrayMedicamentos;
       listaTemp[event.target.id].Entrega = event.target.value;
@@ -167,16 +166,16 @@ class RequisicionesForm extends React.Component {
         listaTemp[event.target.id].Aprovechamiento = "";
       }
       this.state.ListaPedido.ArrayMedicamentos = listaTemp;
-      this.setState((state) => ({
+      this.setState(state => ({
         ...state,
-        ListaPedido: this.state.ListaPedido,
+        ListaPedido: this.state.ListaPedido
       }));
     }
 
     // this.setState({Cantidad: event.target.value});
   };
 
-  AprovechamientoBorrador = (event) => {
+  AprovechamientoBorrador = event => {
     if (event.target) {
       let listaTemp = this.state.ListaPedido.ArrayMedicamentos;
       if (event.target.checked === true) {
@@ -184,9 +183,9 @@ class RequisicionesForm extends React.Component {
           listaTemp[event.target.id].Aprovechamiento = 1;
           listaTemp[event.target.id].Pendiente = 0;
           listaTemp[event.target.id].Entrega = 0;
-          this.setState((state) => ({
+          this.setState(state => ({
             ...state,
-            ListaPedido: listaTemp,
+            ListaPedido: listaTemp
           }));
         } else {
           listaTemp[event.target.id].Aprovechamiento =
@@ -195,9 +194,9 @@ class RequisicionesForm extends React.Component {
             listaTemp[event.target.id].Pendiente -
             listaTemp[event.target.id].Aprovechamiento;
           listaTemp[event.target.id].EstadoAprovechamiento = false;
-          this.setState((state) => ({
+          this.setState(state => ({
             ...state,
-            ListaPedido: listaTemp,
+            ListaPedido: listaTemp
           }));
         }
       } else {
@@ -206,15 +205,15 @@ class RequisicionesForm extends React.Component {
         listaTemp[event.target.id].Pendiente = 0;
         listaTemp[event.target.id].Aprovechamiento = "";
         listaTemp[event.target.id].EstadoAprovechamiento = true;
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
-          ListaPedido: listaTemp,
+          ListaPedido: listaTemp
         }));
       }
     }
   };
 
-  Aprovechamiento = (event) => {
+  Aprovechamiento = event => {
     if (event.target) {
       let listaTemp = this.state.ListaPedido.ArrayMedicamentos;
       if (event.target.checked === true) {
@@ -223,9 +222,9 @@ class RequisicionesForm extends React.Component {
           listaTemp[event.target.id].Pendiente = 0;
           listaTemp[event.target.id].Entrega = 0;
           this.state.ListaPedido.ArrayMedicamentos = listaTemp;
-          this.setState((state) => ({
+          this.setState(state => ({
             ...state,
-            ListaPedido: this.state.ListaPedido,
+            ListaPedido: this.state.ListaPedido
           }));
         } else {
           listaTemp[event.target.id].Aprovechamiento =
@@ -235,9 +234,9 @@ class RequisicionesForm extends React.Component {
             listaTemp[event.target.id].Aprovechamiento;
           listaTemp[event.target.id].EstadoAprovechamiento = false;
           this.state.ListaPedido.ArrayMedicamentos = listaTemp;
-          this.setState((state) => ({
+          this.setState(state => ({
             ...state,
-            ListaPedido: this.state.ListaPedido,
+            ListaPedido: this.state.ListaPedido
           }));
         }
       } else {
@@ -247,15 +246,15 @@ class RequisicionesForm extends React.Component {
         listaTemp[event.target.id].Aprovechamiento = "";
         listaTemp[event.target.id].EstadoAprovechamiento = true;
         this.state.ListaPedido.ArrayMedicamentos = listaTemp;
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
-          ListaPedido: this.state.ListaPedido,
+          ListaPedido: this.state.ListaPedido
         }));
       }
     }
   };
 
-  AgregarMedicamento = (data) => {
+  AgregarMedicamento = data => {
     this.state.ListaItemMedicamentos = data;
   };
   ConfirmarMedicamento = () => {
@@ -278,30 +277,30 @@ class RequisicionesForm extends React.Component {
     this.state.ListaPedido.ArrayMedicamentos[IndexMedicamento].Pendiente =
       this.state.ListaPedido.ArrayMedicamentos[IndexMedicamento].Cantidad -
       Cantidad;
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      DispensModel: !this.state.DispensModel,
+      DispensModel: !this.state.DispensModel
     }));
   };
 
-  Guardar = (e) => {
+  Guardar = e => {
     var dt = new Date();
     let fechaActual = `${(dt.getMonth() + 1).toString().padStart(2, "0")}/${dt
       .getDate()
       .toString()
       .padStart(2, "0")}/${dt
-        .getFullYear()
-        .toString()
-        .padStart(4, "0")} ${dt
-          .getHours()
-          .toString()
-          .padStart(2, "0")}:${dt
-            .getMinutes()
-            .toString()
-            .padStart(2, "0")}:${dt
-              .getSeconds()
-              .toString()
-              .padStart(2, "0")}`;
+      .getFullYear()
+      .toString()
+      .padStart(4, "0")} ${dt
+      .getHours()
+      .toString()
+      .padStart(2, "0")}:${dt
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")}:${dt
+      .getSeconds()
+      .toString()
+      .padStart(2, "0")}`;
 
     e.preventDefault();
     let objDisensacion = {};
@@ -312,8 +311,8 @@ class RequisicionesForm extends React.Component {
     let Empresa = ObjSesion.Usuario.Empresa;
     objDisensacion.Sede = Sede.value;
     objDisensacion.Usuario = this.state.ListaPedido.Usuario;
-    objDisensacion.UsuarioFarmacia = ObjSesion.Usuario.NombreCompleto
-    objDisensacion.IdentificacionUsuario = ObjSesion.Usuario.Identificacion
+    objDisensacion.UsuarioFarmacia = ObjSesion.Usuario.NombreCompleto;
+    objDisensacion.IdentificacionUsuario = ObjSesion.Usuario.Identificacion;
     objDisensacion.Observaciones = this.state.ListaPedido.Observaciones;
     objDisensacion.SedeDestino = this.state.ListaPedido.SedeDestino;
     objDisensacion.FechaRegistroSolicitudRequisicion = this.state.ListaPedido.Fecha;
@@ -321,7 +320,7 @@ class RequisicionesForm extends React.Component {
     objDisensacion.txtHoraRegistroDispensacion = fechaActual.substring(11, 16);
     objDisensacion.FechaRegistroDispensacion = fechaActual;
     objDisensacion.txtFechaRegistroDispensacion = fechaActual.substring(0, 10);
-    objDisensacion.CodigoUnidades = this.state.ListaPedido.CodigoUnidad
+    objDisensacion.CodigoUnidades = this.state.ListaPedido.CodigoUnidad;
     objDisensacion.Unidades = this.state.ListaPedido.Unidades;
     objDisensacion.Estado = "Dispensado";
     objDisensacion.Empresa = Empresa;
@@ -330,7 +329,11 @@ class RequisicionesForm extends React.Component {
 
     let MedicamentoTemporal = [];
     for (let i = 0; i < this.state.ListaPedido.ArrayMedicamentos.length; i++) {
-      if (this.state.ListaPedido.ArrayMedicamentos[i].Pendiente === 0 || this.state.ListaPedido.ArrayMedicamentos[i].Pendiente != this.state.ListaPedido.ArrayMedicamentos[i].Cantidad) {
+      if (
+        this.state.ListaPedido.ArrayMedicamentos[i].Pendiente === 0 ||
+        this.state.ListaPedido.ArrayMedicamentos[i].Pendiente !=
+          this.state.ListaPedido.ArrayMedicamentos[i].Cantidad
+      ) {
         MedicamentoTemporal.push(this.state.ListaPedido.ArrayMedicamentos[i]);
       } else {
         console.log("No se guarda este doc");
@@ -348,9 +351,9 @@ class RequisicionesForm extends React.Component {
         action = "actualizar";
       }
     }
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      Preload: true,
+      Preload: true
     }));
 
     fetch(gsUrlApi + "/dispensaciones_requisiciones/" + action + "/", {
@@ -358,31 +361,35 @@ class RequisicionesForm extends React.Component {
       body: JSON.stringify(objDisensacion),
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
-      .then((res) => res.json())
-      .then((data) => data)
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => data)
+      .then(data => {
         if (data.error) {
-          cogoToast.error("Hubo un error dispensando la solicitud", { position: 'bottom-right', heading: 'Error' });
-
+          cogoToast.error("Hubo un error dispensando la solicitud", {
+            position: "bottom-right",
+            heading: "Error"
+          });
         } else {
-
-          cogoToast.success("Solicitud dispensada correctamente", { position: 'bottom-right', heading: 'Agregado' });
+          cogoToast.success("Solicitud dispensada correctamente", {
+            position: "bottom-right",
+            heading: "Agregado"
+          });
           if (this.state.EstadoBorrador == false) {
             let Data = this.state.ListaPedido;
             this.EliminarSolicitudes(Data);
           } else {
-            this.setState((state) => ({
+            this.setState(state => ({
               ...state,
-              Preload: false,
+              Preload: false
             }));
             this.props.OcultarFormulario();
           }
         }
       })
-      .catch((err) => console.log("err", err));
+      .catch(err => console.log("err", err));
   };
   AlertaBorrador = () => {
     confirmAlert({
@@ -391,13 +398,13 @@ class RequisicionesForm extends React.Component {
       buttons: [
         {
           label: "Si",
-          onClick: () => this.onClick(),
+          onClick: () => this.onClick()
         },
         {
           label: "No",
-          onClick: () => this.onClick2("Click no"),
-        },
-      ],
+          onClick: () => this.onClick2("Click no")
+        }
+      ]
     });
   };
 
@@ -408,44 +415,44 @@ class RequisicionesForm extends React.Component {
       buttons: [
         {
           label: "Aceptar",
-          onClick: () => this.onClick2(),
+          onClick: () => this.onClick2()
         },
         {
           label: "Crear Relcaicóon",
-          onClick: () => this.CrearRelacion(),
-        },
-      ],
+          onClick: () => this.CrearRelacion()
+        }
+      ]
     });
   };
 
   CrearRelacion = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      OpenModal2: true,
+      OpenModal2: true
     }));
   };
 
-  handleFormSubmit = (data) => {
+  handleFormSubmit = data => {
     fetch(gsUrlApi + "/medicamentos/insertar/", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
-      .then((res) => res.json())
-      .then((data) => data)
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => data)
+      .then(data => {
         if (data.roles.length > 0) {
-          this.setState((state) => ({
+          this.setState(state => ({
             ...state,
-            OpenModal2: false,
+            OpenModal2: false
           }));
           this.AlertaRelacionGuardada();
         }
       })
-      .catch((err) => console.log("err", err));
+      .catch(err => console.log("err", err));
   };
 
   AlertaRelacionGuardada = () => {
@@ -455,13 +462,13 @@ class RequisicionesForm extends React.Component {
       buttons: [
         {
           label: "Aceptar",
-          onClick: "",
-        },
-      ],
+          onClick: ""
+        }
+      ]
     });
   };
 
-  onClick = (Datos) => {
+  onClick = Datos => {
     for (let i = 0; i < this.state.arrayBorrador.length; i++) {
       if (this.state.arrayBorrador[i].Aprovechamiento) {
         this.state.arrayBorrador[
@@ -473,13 +480,13 @@ class RequisicionesForm extends React.Component {
         ].ArrayMedicamentos.EstadoAprovechamiento = true;
       }
     }
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      ListaPedido: this.state.arrayBorrador,
+      ListaPedido: this.state.arrayBorrador
     }));
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      EstadoCargueBorrador: true,
+      EstadoCargueBorrador: true
     }));
   };
   ListarProductos = (data, index, Descripcion) => {
@@ -489,12 +496,12 @@ class RequisicionesForm extends React.Component {
       body: JSON.stringify(),
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
-      .then((res) => res.json())
-      .then((data) => data)
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => data)
+      .then(data => {
         let lstDatos = data.datos;
         let array = [];
         this.state.ListaRelacionProductos = lstDatos;
@@ -508,24 +515,24 @@ class RequisicionesForm extends React.Component {
           this.AlertaRelacion();
         }
       })
-      .catch((err) => console.log("err", err));
+      .catch(err => console.log("err", err));
   };
 
-  buscarinfomedicamentos = (IdData) => {
+  buscarinfomedicamentos = IdData => {
     fetch(ApiSios + "/ConsultarMedicamentos/", {
       method: "POST",
       body: JSON.stringify({
         Filtro: IdData,
-        Software: "ZEUS",
+        Software: "ZEUS"
       }),
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
-      .then((res) => res.json())
-      .then((data) => data)
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => data)
+      .then(data => {
         let items = [];
         let lstDatos = data.Datos;
         let objAcciones = {};
@@ -539,73 +546,73 @@ class RequisicionesForm extends React.Component {
         objAcciones.MedicamentoTemporal = lstDatos[0].Id;
         objAcciones.Grupo = lstDatos[0].Grupo;
         items.push(objAcciones);
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
-          listamedicamentos: items,
+          listamedicamentos: items
         }));
       })
-      .catch((err) => console.log("err", err));
+      .catch(err => console.log("err", err));
   };
-  ConsultarBorrador = (Data) => {
+  ConsultarBorrador = Data => {
     fetch(gsUrlApi + "/dispensaciones/buscarBorrador/" + Data + "/1", {
       method: "GET",
       body: JSON.stringify(),
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
-      .then((res) => res.json())
-      .then((data) => data)
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => data)
+      .then(data => {
         var objData = data.datos;
         if (objData.length > 0) {
-          this.setState((state) => ({
+          this.setState(state => ({
             ...state,
-            arrayBorrador: objData,
+            arrayBorrador: objData
           }));
           this.AlertaBorrador();
         }
       })
-      .catch((err) => console.log("err", err));
+      .catch(err => console.log("err", err));
   };
   onClick2 = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      Alerta2: false,
+      Alerta2: false
     }));
   };
-  EliminarSolicitudes = (dataDispensacion) => {
+  EliminarSolicitudes = dataDispensacion => {
     fetch(gsUrlApi + "/solicitudes_requisiciones/eliminar/", {
       method: "POST",
       body: JSON.stringify(dataDispensacion),
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
-      .then((res) => res.json())
-      .then((data) => data)
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => data)
+      .then(data => {
         if (data.error) {
         } else {
-          this.setState((state) => ({
+          this.setState(state => ({
             ...state,
-            Preload: false,
+            Preload: false
           }));
           this.props.OcultarFormulario();
         }
       })
-      .catch((err) => console.log("err", err));
+      .catch(err => console.log("err", err));
   };
 
   actiononButton = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      OpenModal2: false,
+      OpenModal2: false
     }));
   };
-  ValorAprovechamiento = (event) => {
+  ValorAprovechamiento = event => {
     if (event.target) {
       let listaTemp = this.state.ListaPedido.ArrayMedicamentos;
       listaTemp[event.target.id].Aprovechamiento = event.target.value;
@@ -619,13 +626,13 @@ class RequisicionesForm extends React.Component {
           listaTemp[event.target.id].Cantidad -
           listaTemp[event.target.id].Entrega;
       }
-      this.setState((state) => ({
+      this.setState(state => ({
         ...state,
-        ListaPedido: listaTemp,
+        ListaPedido: listaTemp
       }));
     }
   };
-  ValorAprovechamientoBorrador = (event) => {
+  ValorAprovechamientoBorrador = event => {
     if (event.target) {
       let listaTemp = this.state.ListaPedido.ArrayMedicamentos;
       listaTemp[event.target.id].Aprovechamiento = event.target.value;
@@ -639,13 +646,13 @@ class RequisicionesForm extends React.Component {
           listaTemp[event.target.id].Cantidad -
           listaTemp[event.target.id].Entrega;
       }
-      this.setState((state) => ({
+      this.setState(state => ({
         ...state,
-        ListaPedido: listaTemp,
+        ListaPedido: listaTemp
       }));
     }
   };
-  DispensacionToggleModel = (array) => {
+  DispensacionToggleModel = array => {
     if (array) {
       array = array.toString();
       if (array) {
@@ -654,83 +661,83 @@ class RequisicionesForm extends React.Component {
           body: JSON.stringify({ Filtro: array, Software: "ZEUS" }),
           headers: {
             "Content-Type": "application/json; charset=UTF-8",
-            Accept: "application/json",
-          },
+            Accept: "application/json"
+          }
         })
-          .then((res) => res.json())
-          .then((data) => data)
-          .then((data) => {
+          .then(res => res.json())
+          .then(data => data)
+          .then(data => {
             if (data.error) {
             } else {
               let LstDatos = data.Datos;
-              this.setState((state) => ({
+              this.setState(state => ({
                 ...state,
                 ValueMedicamento: this.state.ListaPedido.ArrayMedicamentos[
                   IndexMedicamento
-                ],
+                ]
               }));
-              this.setState((state) => ({
+              this.setState(state => ({
                 ...state,
-                ListaMedicamentos: LstDatos,
+                ListaMedicamentos: LstDatos
               }));
               if (this.state.EstadoCargueBorrador) {
                 if (
                   this.state.ListaPedido.ArrayMedicamentos[IndexMedicamento]
                     .Productos
                 ) {
-                  this.setState((state) => ({
+                  this.setState(state => ({
                     ...state,
                     MedicamentoZeus: this.state.ListaPedido.ArrayMedicamentos[
                       IndexMedicamento
-                    ].Productos,
+                    ].Productos
                   }));
                 }
-                this.setState((state) => ({
+                this.setState(state => ({
                   ...state,
-                  DispensModel: !this.state.DispensModel,
+                  DispensModel: !this.state.DispensModel
                 }));
               } else {
                 if (
                   this.state.ListaPedido.ArrayMedicamentos[IndexMedicamento]
                     .Productos
                 ) {
-                  this.setState((state) => ({
+                  this.setState(state => ({
                     ...state,
                     MedicamentoZeus: this.state.ListaPedido.ArrayMedicamentos[
                       IndexMedicamento
-                    ].Productos,
+                    ].Productos
                   }));
                 }
-                this.setState((state) => ({
+                this.setState(state => ({
                   ...state,
-                  DispensModel: !this.state.DispensModel,
+                  DispensModel: !this.state.DispensModel
                 }));
               }
             }
           })
-          .catch((err) => console.log("err", err));
+          .catch(err => console.log("err", err));
       } else {
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
-          DispensModel: !this.state.DispensModel,
+          DispensModel: !this.state.DispensModel
         }));
       }
     } else {
-      this.setState((state) => ({
+      this.setState(state => ({
         ...state,
-        DispensModel: !this.state.DispensModel,
+        DispensModel: !this.state.DispensModel
       }));
     }
   };
 
   ActivarBorrador = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      EstadoBorrador: !this.state.EstadoBorrador,
+      EstadoBorrador: !this.state.EstadoBorrador
     }));
   };
 
-  resta = (event) => {
+  resta = event => {
     if (event.target) {
       // this.state.ListaPedido.ArrayMedicamentos[event.target.id].Entrega = "";
       let listaTemporal = this.state.ListaPedido.ArrayMedicamentos;
@@ -743,9 +750,9 @@ class RequisicionesForm extends React.Component {
         // listaTemporal[event.target.id].Pendiente = listaTemporal[event.target.id].Entrega - listaTemporal[event.target.id].Cantidad
         // listaTemporal[event.target.id].EstadoAprovechamiento = false
         this.state.ListaPedido.ArrayMedicamentos = listaTemporal;
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
-          ListaPedido: this.state.ListaPedido,
+          ListaPedido: this.state.ListaPedido
         }));
       } else {
         listaTemporal[event.target.id].Entrega =
@@ -754,17 +761,17 @@ class RequisicionesForm extends React.Component {
         listaTemporal[event.target.id].Aprovechamiento = "";
         listaTemporal[event.target.id].EstadoAprovechamiento = true;
         this.state.ListaPedido.ArrayMedicamentos = listaTemporal;
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
-          ListaPedido: this.state.ListaPedido,
+          ListaPedido: this.state.ListaPedido
         }));
       }
     }
   };
 
-  handleAfterPrint = () => { };
+  handleAfterPrint = () => {};
 
-  handleBeforePrint = () => { };
+  handleBeforePrint = () => {};
 
   handleOnBeforeGetContent2 = () => {
     this.setState({ text: "Loading new text...", isLoading2: true });
@@ -820,7 +827,7 @@ class RequisicionesForm extends React.Component {
             border: "1px #dee2e6",
             padding: "revert",
             backgroundColor: "white",
-            borderRadius: "10px",
+            borderRadius: "10px"
           }}
         >
           <form onSubmit={this.Guardar}>
@@ -864,19 +871,14 @@ class RequisicionesForm extends React.Component {
                 </div>
               </div>
 
-
               <div className="row mt-2">
                 <div className="col-md-6 row">
                   <div className="font-weight-bold">Unidades:</div>
-                  <div className="ml-2">
-                    {this.state.ListaPedido.Unidades}
-                  </div>
+                  <div className="ml-2">{this.state.ListaPedido.Unidades}</div>
                 </div>
                 <div className="col-md-6 row">
                   <div className="font-weight-bold">Fecha Solicitud:</div>
-                  <div className="ml-2">
-                    {this.state.ListaPedido.FechaHora}
-                  </div>
+                  <div className="ml-2">{this.state.ListaPedido.FechaHora}</div>
                 </div>
               </div>
             </div>
@@ -938,7 +940,7 @@ class RequisicionesForm extends React.Component {
             <div className="right-panel roe-box-shadow">
               <div className="contact-table">
                 {this.state.ListaPedido &&
-                  this.state.ListaPedido.ArrayMedicamentos ? (
+                this.state.ListaPedido.ArrayMedicamentos ? (
                   <Table hover className="mb-0 border">
                     <thead className="">
                       <tr>
@@ -1016,17 +1018,17 @@ class RequisicionesForm extends React.Component {
                                 onClick={
                                   e.ArrayMedicamentos
                                     ? () =>
-                                      this.ListarProductos(
-                                        e.Id,
-                                        i,
-                                        e.Descripcion
-                                      )
+                                        this.ListarProductos(
+                                          e.Id,
+                                          i,
+                                          e.Descripcion
+                                        )
                                     : () =>
-                                      this.ListarProductos(
-                                        e.Id,
-                                        i,
-                                        e.Descripcion
-                                      )
+                                        this.ListarProductos(
+                                          e.Id,
+                                          i,
+                                          e.Descripcion
+                                        )
                                 }
                               ></i>
                             </td>
@@ -1071,10 +1073,10 @@ class RequisicionesForm extends React.Component {
               <ModalBody>
                 <FormModal
                   data={this.props.ListaPedido}
-                  handleFormSubmit={(data) => this.handleFormSubmit(data)}
+                  handleFormSubmit={data => this.handleFormSubmit(data)}
                   ListaMedicamentos={this.state.ListaMedicamentos}
                   DatosMedicamentosZeus={this.state.MedicamentoZeus}
-                  AgregarMedicamento={(data) => this.AgregarMedicamento(data)}
+                  AgregarMedicamento={data => this.AgregarMedicamento(data)}
                   Cantidad={this.state.ValueMedicamento.Cantidad}
                   ListaRelacionProductos={this.state.ListaRelacionProductos}
                 />
@@ -1118,7 +1120,7 @@ class RequisicionesForm extends React.Component {
             <ModalRelacionMedicamneto
               listamedicamentos={this.state.listamedicamentos}
               actiononButton={() => this.actiononButton()}
-              handleFormSubmit={(data) => this.handleFormSubmit(data)}
+              handleFormSubmit={data => this.handleFormSubmit(data)}
             />
           </Modal>
         </fieldset>

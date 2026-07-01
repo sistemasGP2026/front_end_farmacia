@@ -8,6 +8,8 @@ import BottomCardLinechartSecondWidget from "./bottomcardlinetype2/BottomCardLin
 import MyBalanceWidget from "./mybalance/MyBalanceWidget";
 import SalePrediction from "./saleprediction/SalePrediction";
 import UserInfoDoughnutWidget from "./userinfodoughnut/UserInfoDoughnutWidget";
+import ArchivedPrescriptionsWidget from "./archivedprescriptions/ArchivedPrescriptionsWidget";
+import DevolucionesResumenWidget from "./devolucionesresumen/DevolucionesResumenWidget";
 
 export {
   MinibarWidgets,
@@ -19,5 +21,7 @@ export {
   BottomCardLinechartSecondWidget,
   MyBalanceWidget,
   SalePrediction,
-  UserInfoDoughnutWidget
+  UserInfoDoughnutWidget,
+  ArchivedPrescriptionsWidget,
+  DevolucionesResumenWidget
 };

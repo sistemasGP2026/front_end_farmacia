@@ -3,6 +3,8 @@ import { Doughnut } from "react-chartjs-2";
 import SalePredictionWrapper from "./saleprediction.style";
 import customTooltip from "components/common/chartTooltip";
 
+const formatNumber = value => new Intl.NumberFormat("es-CO").format(value || 0);
+
 const options = {
   tooltips: {
     enabled: false,
@@ -28,34 +30,49 @@ const options = {
   }
 };
 
-const data = {
-  datasets: [
-    {
-      data: [185, 85, 65],
-      backgroundColor: ["#5C258D", "#ffe670", "#00c486"],
-      borderColor: ["#5C258D", "#ffe670", "#00c486"],
-      hoverBackgroundColor: ["#a7afb7", "#a7afb7", "#a7afb7"],
-      hoverBorderColor: ["#a7afb7", "#a7afb7", "#a7afb7"]
-    }
-  ],
+const LatestActivity = props => {
+  const resumen = props.resumen || {
+    solicitadas: 0,
+    dispensadas: 0,
+    entregadas: 0,
+    total: 0
+  };
 
-  // These labels appear in the legend and in the tooltips when hovering different arcs
-  labels: ["Paper Design", "Developing", "Testing"]
-};
+  const chartData = {
+    datasets: [
+      {
+        data: [resumen.solicitadas, resumen.dispensadas, resumen.entregadas],
+        backgroundColor: ["#3a86ff", "#ffbe0b", "#06d6a0"],
+        borderColor: ["#3a86ff", "#ffbe0b", "#06d6a0"],
+        hoverBackgroundColor: ["#245bc5", "#d99900", "#03a57b"],
+        hoverBorderColor: ["#245bc5", "#d99900", "#03a57b"]
+      }
+    ],
+    labels: ["Solicitadas", "Dispensadas", "Entregadas"]
+  };
 
-const LatestActivity = () => {
   return (
     <SalePredictionWrapper className="fill-height">
       <div className="card roe-shadow-2 fill-height">
         <div className="card-body">
-          <h4 className="card-title fs-18 header">Project Completion</h4>
+          <h4 className="card-title fs-18 header">
+            {props.Titulo ?? "Project Completion"}
+          </h4>
           <div className="row">
             <div className="col-md-6 aligner-wrapper mt-15">
-              <Doughnut data={data} height={160} options={options} />
+              {props.loading ? (
+                <div className="d-flex align-items-center justify-content-center h-100 text-muted">
+                  Cargando datos...
+                </div>
+              ) : (
+                <Doughnut data={chartData} height={160} options={options} />
+              )}
               <div className="wrapper d-flex flex-column justify-content-center absolute absolute-center middle-block">
-                <h4 className="d-block text-center mb-0 text-muted">567</h4>
+                <h4 className="d-block text-center mb-0 text-muted">
+                  {formatNumber(resumen.total)}
+                </h4>
                 <small className="d-block text-center mb-2 text-muted">
-                  Daily average
+                  Total
                 </small>
               </div>
             </div>
@@ -63,24 +80,35 @@ const LatestActivity = () => {
               <div className="d-flex flex-column justify-content-center">
                 <div className="d-flex align-items-center">
                   <div className="dot-indicator nevy mt-1 mr-2"></div>
-                  <h4 className="mb-0 text-dark fs-20">2.34%</h4>
+                  <h4 className="mb-0 text-dark fs-20">
+                    {formatNumber(resumen.solicitadas)}
+                  </h4>
                 </div>
-                <small className="text-muted ml-3">Paper Designs</small>
+                <small className="text-muted ml-3">Solicitadas</small>
               </div>
               <div className="d-flex flex-column justify-content-center border-top border-bottom py-3 mt-3 mb-3">
                 <div className="d-flex align-items-center">
                   <div className="dot-indicator bg-warning mt-1 mr-2"></div>
-                  <h4 className="mb-0 text-dark fs-20">40%</h4>
+                  <h4 className="mb-0 text-dark fs-20">
+                    {formatNumber(resumen.dispensadas)}
+                  </h4>
                 </div>
-                <small className="text-muted ml-3">Developing</small>
+                <small className="text-muted ml-3">Dispensadas</small>
               </div>
               <div className="d-flex flex-column justify-content-center">
                 <div className="d-flex align-items-center">
                   <div className="dot-indicator bg-success mt-1 mr-2"></div>
-                  <h4 className="mb-0 text-dark fs-20">12%</h4>
+                  <h4 className="mb-0 text-dark fs-20">
+                    {formatNumber(resumen.entregadas)}
+                  </h4>
                 </div>
-                <small className="text-muted ml-3">Testing</small>
+                <small className="text-muted ml-3">Entregadas</small>
               </div>
+              {props.error ? (
+                <small className="text-danger d-block mt-3">
+                  No fue posible cargar la informacion en tiempo real.
+                </small>
+              ) : null}
             </div>
           </div>
         </div>

@@ -37,7 +37,11 @@ import {
   InformePrescripcionesArchivadas,
   InformeDispensacionesDescuento,
   InformePrescripcionesPeriodo,
-  InformeRequisiciones
+  InformeRequisiciones,
+  InformeTiempoCicloDispensacion,
+  InformeAdherenciaSeguimientoDispensacion,
+  ServiciosSeguimiento,
+  SeguimientosAlmacenamientos
 } from "views/app/index";
 import Board from "components/scrumboard/Board";
 
@@ -139,15 +143,15 @@ const dashboardRoutes = [
   { path: "/contact", component: Contact },
   { path: "/roles", component: Roles },
   { path: "/usuarios", component: Usuarios },
-  { path: "/Configuraciones", component: Configuraciones },  
+  { path: "/Configuraciones", component: Configuraciones },
   { path: "/requisiciones", component: Requisiciones },
-  { path: "/recepciones", component: Recepciones },    
+  { path: "/recepciones", component: Recepciones },
   { path: "/dispensaciones", component: Dispensaciones },
   { path: "/HistorialDispensaciones", component: HistorialDispensaciones },
   { path: "/HistorialDevoluciones", component: HistorialDevoluciones },
-  { path: "/SolicitudesPendientes", component: SolicitudesPendientes },    
+  { path: "/SolicitudesPendientes", component: SolicitudesPendientes },
   { path: "/SolicitudesDispensadas", component: SolicitudesDispensadas },
-  { path: "/devoluciones", component: Devoluciones }, 
+  { path: "/devoluciones", component: Devoluciones },
   { path: "/todos", component: Todos },
   { path: "/scrumboard", component: Scrumboard },
   { path: "/filemanager", component: FileManager },
@@ -155,26 +159,70 @@ const dashboardRoutes = [
   { path: "/scrumboard/board/:id", component: Board },
   { path: "/charts", component: Charts },
   { path: "/gauges", component: Guages },
-  { path: "/RelacionMedicProduc", component: RelacionMedicamentoProducto},
-  { path: "/RecepcionesRequisiciones", component: RecepcionesRequisiciones},
-  { path: "/DispensacionesRequisiciones", component: DispensacionesRequisiciones},
-  
-  { path: "/AuditoriaMedicamentos", component: InformeAuditoriaMedicamentos},
-  { path: "/InformeDevoluciones", component: InformeDevoluciones},
-  { path: "/InformeDispensaciones", component: InformeDispensaciones},
-  { path: "/InformeAprovechamiento", component: InformeAprovechamiento},
-  { path: "/InformeDevolucionAprovechamiento", component: InformeDevolucionAprovechamiento},
-  { path: "/InformePrescripciones", component: InformePrescripciones},
-  { path: "/InformePrescripcionesArchivadas", component: InformePrescripcionesArchivadas},
-  { path: "/InformePrescripcionesPeriodo", component: InformePrescripcionesPeriodo},
-  { path: "/InformeRequisiciones", component: InformeRequisiciones},
-  { path: "/InformeRelacionMedicamentos", component: InformeRelacionMedicamentos},
-  { path: "/SolicitudesDevoluciones", component: SolicitudesDevolucionesAprovechamiento},
-  { path: "/SolicitudesDevolucionesPendientes", component: DevolucionesAprovechamientoPendientes},
-  { path: "/SolicitudesDevolucionesConfirmadas", component: SolicitudesDevolucionesConfirmadas},
-  { path: "/InformeDispensacionesDescuento", component: InformeDispensacionesDescuento},
-  
-  { path: "/RecepcionesRequisicionesRecibidas", component: recepcionesRequisicionesRecibidas},
+  { path: "/RelacionMedicProduc", component: RelacionMedicamentoProducto },
+  { path: "/RecepcionesRequisiciones", component: RecepcionesRequisiciones },
+  {
+    path: "/DispensacionesRequisiciones",
+    component: DispensacionesRequisiciones
+  },
+
+  { path: "/AuditoriaMedicamentos", component: InformeAuditoriaMedicamentos },
+  { path: "/InformeDevoluciones", component: InformeDevoluciones },
+  { path: "/InformeDispensaciones", component: InformeDispensaciones },
+  { path: "/InformeAprovechamiento", component: InformeAprovechamiento },
+  {
+    path: "/InformeDevolucionAprovechamiento",
+    component: InformeDevolucionAprovechamiento
+  },
+  { path: "/InformePrescripciones", component: InformePrescripciones },
+  {
+    path: "/InformePrescripcionesArchivadas",
+    component: InformePrescripcionesArchivadas
+  },
+  {
+    path: "/InformePrescripcionesPeriodo",
+    component: InformePrescripcionesPeriodo
+  },
+
+  {
+    path: "/InformeRelacionMedicamentos",
+    component: InformeRelacionMedicamentos
+  },
+  {
+    path: "/SolicitudesDevoluciones",
+    component: SolicitudesDevolucionesAprovechamiento
+  },
+  {
+    path: "/SolicitudesDevolucionesPendientes",
+    component: DevolucionesAprovechamientoPendientes
+  },
+  {
+    path: "/SolicitudesDevolucionesConfirmadas",
+    component: SolicitudesDevolucionesConfirmadas
+  },
+  {
+    path: "/InformeDispensacionesDescuento",
+    component: InformeDispensacionesDescuento
+  },
+  { path: "/InformeRequisiciones", component: InformeRequisiciones },
+  {
+    path: "/InformeTiempoCicloDispensacion",
+    component: InformeTiempoCicloDispensacion
+  },
+  {
+    path: "/InformeAdherenciaSeguimientoDispensacion",
+    component: InformeAdherenciaSeguimientoDispensacion
+  },
+  { path: "/ServiciosSeguimiento", component: ServiciosSeguimiento },
+  {
+    path: "/SeguimientosAlmacenamientos",
+    component: SeguimientosAlmacenamientos
+  },
+
+  {
+    path: "/RecepcionesRequisicionesRecibidas",
+    component: recepcionesRequisicionesRecibidas
+  },
   // page route
   { path: "/profile", component: UserProfile },
   // Form Route
